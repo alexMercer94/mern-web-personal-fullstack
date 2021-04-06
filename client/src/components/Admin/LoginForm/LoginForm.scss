@@ -1,13 +1,8 @@
 @import '../../../scss/index.scss';
 
-.register-form {
-    text-align: left;
-
-    .ant-form-item {
-        &:nth-child(3),
-        &:last-of-type {
-            margin: 0;
-        }
+.login-form {
+    .ant-form-item:last-of-type {
+        margin: 0;
     }
 
     &__input {
@@ -33,7 +28,6 @@
         background-color: $primary-color;
         color: $font-light;
         height: 42px;
-        margin-top: 20px;
 
         &:hover {
             background-color: $primary-color-hover;

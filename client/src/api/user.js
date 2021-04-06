@@ -37,3 +37,29 @@ export const signUpApi = (data) => {
             };
         });
 };
+
+export const signInApi = (payload) => {
+    const url = `${BASE_PATH}/${API_VERSION}/sign-in`;
+
+    const params = {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    };
+
+    return fetch(url, params)
+        .then((response) => {
+            return response.json();
+        })
+        .then((result) => {
+            return result;
+        })
+        .catch((error) => {
+            return {
+                ok: false,
+                message: error.message,
+            };
+        });
+};

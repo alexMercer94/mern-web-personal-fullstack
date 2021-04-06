@@ -73,7 +73,6 @@ const RegisterForm = () => {
      */
     const register = async (e) => {
         e.preventDefault();
-        // const { email, password, repeatPassword, privacyPolicy } = formValid;
         const emailValue = inputs.email;
         const passwordValue = inputs.password;
         const repeatPasswordValue = inputs.repeatPassword;

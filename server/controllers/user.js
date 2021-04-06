@@ -1,7 +1,12 @@
 const bcrypt = require('bcrypt-nodejs');
-const jwt = require('jwt-simple');
+const jwt = require('../services/jwt');
 const User = require('../models/user');
 
+/**
+ * Register a user
+ * @param {*} req
+ * @param {*} res
+ */
 const signUp = (req, res) => {
     const user = new User();
 
@@ -41,6 +46,44 @@ const signUp = (req, res) => {
     }
 };
 
+/**
+ * Login user
+ * @param {*} req
+ * @param {*} res
+ */
+const signIn = (req, res) => {
+    const params = req.body;
+    const { email, password } = params;
+
+    User.findOne({ email: email.toLowerCase() }, (err, userStored) => {
+        if (err) {
+            res.status(500).send({ message: 'Error del servidor.' });
+        } else {
+            if (!userStored) {
+                res.status(404).send({ message: 'Usuario no encontrado.' });
+            } else {
+                bcrypt.compare(password, userStored.password, (err, check) => {
+                    if (err) {
+                        res.status(500).send({ message: 'Error del servidor.' });
+                    } else if (!check) {
+                        res.status(404).send({ message: 'La contraseña es incorrecta.' });
+                    } else {
+                        if (!userStored.active) {
+                            res.status(200).send({ code: 200, message: 'El usuario no esta activo.' });
+                        } else {
+                            res.status(200).send({
+                                accessToken: jwt.createAccessToken(userStored),
+                                refreshToken: jwt.createRefreshToken(userStored),
+                            });
+                        }
+                    }
+                });
+            }
+        }
+    });
+};
+
 module.exports = {
     signUp,
+    signIn,
 };

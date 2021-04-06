@@ -1,4 +1,4 @@
-import { HomeOutlined, MenuOutlined } from '@ant-design/icons';
+import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -17,9 +17,9 @@ const MenuSider = ({ menuCollapsed }) => {
                     </Link>
                 </Item>
                 <Item key="2">
-                    <Link to={'/admin/menu-web'}>
-                        <MenuOutlined />
-                        <span className="nav-text">Menu Web</span>
+                    <Link to={'/admin/users'}>
+                        <UserOutlined />
+                        <span className="nav-text">Usuarios</span>
                     </Link>
                 </Item>
             </Menu>
